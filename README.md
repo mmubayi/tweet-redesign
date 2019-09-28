@@ -2,6 +2,8 @@
 
 **Tools**: JavaScript, HTML, CSS, Twitter API, Bootstrap
 
+View my redesign of a what a tweet looks like *[here](https://mmubayi.github.io/tweet-redesign)*.
+
 #### Goals & Design Analysis
 To encourage a different type of social behaviour as compared to what I believe the current tweet design encourages now, I have redesigned a tweet to focus on retweeting with comments instead of replying for users, and to continue emphasising the content of the tweet. 
 
