@@ -1,0 +1,115 @@
+<!-- Your name: Maya Mubayi -->
+<!-- Redesigning a Tweet -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Don't change anything before this line! -->
+
+    <!-- Link to Tweet data -->
+    <script type="text/javascript" src="twitter.js"></script>
+    <!-- Link to stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Font Awesome icon library-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="p-5 col-lg-9 col-xl-8">
+          <div class="card">
+            <div class="card-body"> 
+                <div class="input-group mb-3">
+                  <!-- Text area to allow users to quote retweet (Retweet with comment) easily-->
+                    <textarea class="form-control" placeholder="Retweet with comment..."></textarea>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Retweet</button>
+                    </div>
+                  </div>
+
+              <div class= "card">
+                <div class = "card-body">
+                  
+                  <p class="tweet-text" id="text"> </p> 
+                  <hr width="100%" size="8">
+                  
+                  <!-- Displays info about tweet including date/time and interactions-->
+                  <div class="info-bar" >
+                    <p class="tweet-datetime" id="created_at"></p>
+                    <div class=tweet-retweets>
+                      <i class="fa fa-retweet" style="font-size:20px">  </i>
+                      <p id="retweets"></p>
+                    </div>
+                    <div class=tweet-likes>
+                      <i class="fa fa-heart-o" aria-hidden="true" style="font-size:20px"></i>
+                      <p id= "likes" </p>
+                    </div>
+                  </div>
+
+                  <!-- Displays source device of tweet and location of the tweet's author-->
+                  <div class="tweet-source"> 
+                    <p id="source" style="font-size:10px"></p>
+                    <p style="font-size:10px;margin-left:5px"> in </p>
+                    <p id="location" style="font-size:10px; margin-left:5px; color:#9da1a3"></p>
+                  </div>
+
+                  <!-- Shows elements of the original tweet author's profile -->
+                  <div class="user-profile">
+                    <img id="profilepic">
+                    <div class = "screenname">
+                      <h6 id="name" style="font-size: 20px;margin-top:10px"></h6>
+                      <p id="screenName" style="font-size: 10px; margin-left:5px"></p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- This is the main container for the Tweet -->
+              <!-- Added 10 elements to the HTML structure -->
+              <!-- 10 elements: user name, text, user screen name, user profile image url, created at, -->
+              <!-- retweet count, favourite count, source, indices, location-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      //pull data from the twitter.js file
+      document.getElementById("name").innerHTML = tweet.user.name;
+      var hashtagStart = tweet.entities.hashtags[0].indices[0]; //first index of the hastag in text
+      var hashtagEnd = tweet.entities.hashtags[0].indices[1]; // last index of the hashtag in text
+      var tweetAllText = tweet.text;
+      var tweetTextOnly = tweetAllText.substring(0,hashtagStart);
+      var tweetHashtag = tweetAllText.substring(hashtagStart,hashtagEnd); 
+  
+      // put tweet text and hashtag together, allow separate formatting of hashtag portion of tweet
+      document.getElementById("text").innerHTML = tweetTextOnly + '<span class="tweet-hashtag">' + tweetHashtag + '</span>'; 
+      document.getElementById("screenName").innerHTML = '@' + tweet.user.screen_name;
+      document.getElementById("profilepic").src = tweet.user.profile_image_url;
+      
+      var tweetCreatedAt = new Date(tweet.created_at);
+      var tweetDate = tweetCreatedAt.toDateString(); 
+      var tweetTime = tweetCreatedAt.toLocaleTimeString(); 
+      var tweetDT = tweetTime + " - " + tweetDate; // format the date to 00:00:00 - Day Mon DD YYYY
+      document.getElementById("created_at").innerHTML = tweetDT;
+      document.getElementById("retweets").innerHTML = tweet.retweet_count;
+      document.getElementById("likes").innerHTML = tweet.favourite_count;
+      document.getElementById("source").innerHTML = tweet.source; 
+      document.getElementById("location").innerHTML = tweet.user.location;
+    
+    </script>
+
+    <!-- Don't change this! -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
